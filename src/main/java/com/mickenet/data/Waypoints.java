@@ -4,11 +4,11 @@ import org.parse4j.ParseObject;
 
 @ParseClassName("Waypoints")
 public class Waypoints extends ParseObject {
-    String  projectId;
-    Double  Latitud;
-    Double Longitud;
+    private String  projectId;
+    private Double  Latitud;
+    private Double Longitud;
 
-    public String getProjectId() {
+   public String getProjectId() {
         return projectId;
     }
 
@@ -16,19 +16,28 @@ public class Waypoints extends ParseObject {
         this.projectId = projectId;
     }
 
+
+
     public Double getLatitud() {
         return Latitud;
     }
 
-    public void setLatitud(Double latitud) {
+
+// --Commented out by Inspection START (2017-11-20 21:28):
+   public void setLatitud(Double latitud) {
         Latitud = latitud;
     }
+// --Commented out by Inspection STOP (2017-11-20 21:28)
 
+// --Commented out by Inspection START (2017-11-20 21:28):
     public Double getLongitud() {
         return Longitud;
+   }
+// --Commented out by Inspection STOP (2017-11-20 21:28)
+
+// --Commented out by Inspection START (2017-11-20 21:28):
+   public void setLongitud(Double longitud) {
+       Longitud = longitud;
     }
 
-    public void setLongitud(Double longitud) {
-        Longitud = longitud;
-    }
 }
