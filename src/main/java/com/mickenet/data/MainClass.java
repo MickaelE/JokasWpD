@@ -1,9 +1,9 @@
 package com.mickenet.data;
 
 import org.parse4j.ParseException;
-import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 import org.parse4j.callback.FindCallback;
+
 import javax.swing.*;
 import java.awt.event.ComponentAdapter;
 import java.nio.file.Paths;
@@ -17,8 +17,7 @@ class MainClass {
     private JComboBox projectCombo;
     private JButton btnExport;
     private JTextField pathExport;
-    // --Commented out by Inspection (2017-11-20 21:28):private ArrayList projects;
-
+    private ArrayList<String> projects;
 
     private MainClass() {
 
@@ -44,8 +43,9 @@ class MainClass {
     private void createUIComponents() {
     mPanel = new JPanel();
     mPanel.setSize(200,200);
+        getProject();
+        projectCombo = new JComboBox();
 
-        projectCombo = new JComboBox(getProject().toArray());
     pathExport = new JTextField( Paths.get(".").toAbsolutePath().normalize().toString(),20);
 }
     /***
@@ -66,20 +66,18 @@ class MainClass {
      * @return
      */
     private ArrayList<String> getProject(){
-
-        final ArrayList<String> list  = new ArrayList<>();
-
+        projects = new ArrayList<>();
         ParseQuery<Project> query = ParseQuery.getQuery(Project.class);
         query.findInBackground(new FindCallback<Project>() {
             @Override
             public void done(List<Project> results, ParseException e) {
                 for (Project a : results) {
-                    list.add(a.getName());
+                    projects.add(a.getName());
                 }
+                projectCombo.setModel(new DefaultComboBoxModel(projects.toArray()));
             }
         });
-return   list;
+        return projects;
     }
-    
 }
 
