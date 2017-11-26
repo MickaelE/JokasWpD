@@ -5,7 +5,8 @@ import org.parse4j.ParseQuery;
 import org.parse4j.callback.FindCallback;
 
 import javax.swing.*;
-import java.awt.event.ComponentAdapter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,37 +18,20 @@ class MainClass {
     private JComboBox projectCombo;
     private JButton btnExport;
     private JTextField pathExport;
+    private JButton ChangePathButton;
     private ArrayList<String> projects;
 
-    private MainClass() {
+    /*private MainClass() {
 
-        btnExport.addComponentListener(new ComponentAdapter() {
-// --Commented out by Inspection START (2017-11-20 21:28):
-//            public void actionPerformed(ActionEvent e) {
-//                //your actions
-//                setProject(projectCombo.getSelectedItem().toString());
-//            }
-// --Commented out by Inspection STOP (2017-11-20 21:28)
+       btnExport.addComponentListener(new ComponentAdapter() {
+
+            public void actionPerformed(ActionEvent e) {
+               //your actions
+                setProject(projectCombo.getSelectedItem().toString());
+            }
+
         });
-    }
-
-// --Commented out by Inspection START (2017-11-20 21:29):
-//    private void setProject(String s) {
-//        //Hillolder
-//    }
-// --Commented out by Inspection STOP (2017-11-20 21:29)
-
-    /***
-     *
-     */
-    private void createUIComponents() {
-    mPanel = new JPanel();
-    mPanel.setSize(200,200);
-        getProject();
-        projectCombo = new JComboBox();
-
-    pathExport = new JTextField( Paths.get(".").toAbsolutePath().normalize().toString(),20);
-}
+    }*/
     /***
      *
      * @param args
@@ -59,8 +43,44 @@ class MainClass {
         frame.setContentPane(new MainClass().mPanel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    private void setProject(String s) {
+        //Hillolder
+    }
+    /***
+     *
+     */
+    private void createUIComponents() {
+    mPanel = new JPanel();
+     btnExport = new JButton();
+    projectCombo = new JComboBox();
+     ChangePathButton = new JButton();
+
+    mPanel.setSize(200,200);
+        getProject();
+
+        projectCombo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                //
+                // Get the source of the component, which is our combo
+                // box.
+                //
+                JComboBox comboBox = (JComboBox) event.getSource();
+
+                Object selected = comboBox.getSelectedItem();
+                setProject(selected.toString());
+
+            }
+        });
+
+ComponentBorder cb = new ComponentBorder(ChangePathButton);
+        cb.install(pathExport);
+       btnExport.setEnabled(false);
+    pathExport = new JTextField( Paths.get(".").toAbsolutePath().normalize().toString(),20);
+}
+
     /***
      *
      * @return
