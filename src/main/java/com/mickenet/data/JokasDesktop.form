@@ -1,68 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.mickenet.data.MainClass">
-  <grid id="27dc6" binding="mPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="500" height="163"/>
     </constraints>
     <properties/>
     <border type="etched" title="Jokas WP Destop">
       <font/>
     </border>
     <children>
-      <component id="4b9f1" class="javax.swing.JLabel" binding="labelProject">
+      <grid id="4f991" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="0" row-span="3" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Projekt:"/>
-        </properties>
-      </component>
-      <component id="6e041" class="javax.swing.JComboBox" binding="projectCombo" custom-create="true">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
-      </component>
-      <component id="7dd83" class="javax.swing.JButton" binding="btnExport">
+        <border type="none"/>
+        <children>
+          <vspacer id="26ded">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <preferred-size width="160" height="14"/>
+              </grid>
+            </constraints>
+          </vspacer>
+          <component id="7dd83" class="javax.swing.JButton" binding="btnExport">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <label value="Export"/>
+              <text value="Export"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="9d011" binding="pPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="true"/>
         </constraints>
-        <properties>
-          <label value="Exportera"/>
-          <text value="Exportera"/>
-        </properties>
-      </component>
-      <component id="5c039" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="0" row-span="4" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <labelFor value="bdf07"/>
-          <text value="Sökväg"/>
-        </properties>
-      </component>
-      <component id="bdf07" class="javax.swing.JTextField" binding="pathExport" custom-create="true">
-        <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="200" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <horizontalAlignment value="0"/>
-        </properties>
-      </component>
-      <component id="765f5" class="javax.swing.JButton" binding="ChangePathButton" custom-create="true">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="5" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <label value="..."/>
-          <text value="..."/>
-        </properties>
-      </component>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="6e041" class="javax.swing.JComboBox" binding="projectCombo" custom-create="true">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="4" hsize-policy="2" anchor="9" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="43" height="30"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="1f8f7" class="javax.swing.JLabel" binding="lProject">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="35" height="30"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Label"/>
+            </properties>
+          </component>
+          <component id="c5bef" class="javax.swing.JButton" binding="bProject">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="67" height="30"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Ny"/>
+            </properties>
+          </component>
+          <component id="5c039" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <labelFor value="b7ca"/>
+              <text value="Sökväg"/>
+            </properties>
+          </component>
+          <component id="ee536" class="javax.swing.JButton" binding="bChangePath" custom-create="true">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="..."/>
+            </properties>
+          </component>
+          <component id="b7ca" class="javax.swing.JTextField" binding="fexportPath" custom-create="true">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="160" height="28"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>

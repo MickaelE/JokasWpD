@@ -14,10 +14,13 @@ import java.util.List;
 class MainClass {
 
     private JPanel mPanel;
-    private JLabel labelProject;
     private JComboBox projectCombo;
     private JButton btnExport;
-    private JTextField pathExport;
+    private JTextField fexportPath;
+    private JButton bChangePath;
+    private JPanel pPanel;
+    private JButton bProject;
+    private JLabel lProject;
     private JButton ChangePathButton;
     private ArrayList<String> projects;
 
@@ -46,17 +49,17 @@ class MainClass {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-    private void setProject(String s) {
-        //Hillolder
-    }
+
     /***
      *
      */
     private void createUIComponents() {
     mPanel = new JPanel();
      btnExport = new JButton();
-    projectCombo = new JComboBox();
-     ChangePathButton = new JButton();
+     projectCombo = new JComboBox();
+        bChangePath = new JButton();
+     fexportPath = new JTextField(Paths.get(".").toAbsolutePath().normalize().toString(),20);
+
 
     mPanel.setSize(200,200);
         getProject();
@@ -74,11 +77,7 @@ class MainClass {
 
             }
         });
-
-ComponentBorder cb = new ComponentBorder(ChangePathButton);
-        cb.install(pathExport);
        btnExport.setEnabled(false);
-    pathExport = new JTextField( Paths.get(".").toAbsolutePath().normalize().toString(),20);
 }
 
     /***
@@ -98,6 +97,10 @@ ComponentBorder cb = new ComponentBorder(ChangePathButton);
             }
         });
         return projects;
+    }
+
+    private void setProject(String s) {
+        //Hillolder
     }
 }
 
