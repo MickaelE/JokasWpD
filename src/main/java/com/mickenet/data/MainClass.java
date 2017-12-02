@@ -21,6 +21,7 @@ class MainClass {
     private JPanel pPanel;
     private JButton bProject;
     private JLabel lProject;
+    private JLabel lbPath;
     private JButton ChangePathButton;
     private ArrayList<String> projects;
 
@@ -35,6 +36,38 @@ class MainClass {
 
         });
     }*/
+
+    public MainClass() {
+        bProject.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,
+                        "Create Project",
+                        "Jokas WP Desktop",
+                        JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        btnExport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,
+                        "Start export",
+                        "Jokas WP Desktop",
+                        JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        bChangePath.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,
+                        "Path",
+                        "Jokas WP Desktop",
+                        JOptionPane.PLAIN_MESSAGE);
+
+            }
+        });
+    }
+
     /***
      *
      * @param args
@@ -58,8 +91,8 @@ class MainClass {
      btnExport = new JButton();
      projectCombo = new JComboBox();
         bChangePath = new JButton();
+        lbPath = new JLabel();
      fexportPath = new JTextField(Paths.get(".").toAbsolutePath().normalize().toString(),20);
-
 
     mPanel.setSize(200,200);
         getProject();

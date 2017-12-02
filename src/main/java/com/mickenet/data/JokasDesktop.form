@@ -6,7 +6,7 @@
       <xy x="20" y="20" width="500" height="163"/>
     </constraints>
     <properties/>
-    <border type="etched" title="Jokas WP Destop">
+    <border type="etched" title-resource-bundle="Jbundle" title-key="lblTitle">
       <font/>
     </border>
     <children>
@@ -31,7 +31,7 @@
             </constraints>
             <properties>
               <label value="Export"/>
-              <text value="Export"/>
+              <text resource-bundle="Jbundle" key="btnExp"/>
             </properties>
           </component>
         </children>
@@ -59,7 +59,8 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <labelFor value="6e041"/>
+              <text resource-bundle="Jbundle" key="lblProj"/>
             </properties>
           </component>
           <component id="c5bef" class="javax.swing.JButton" binding="bProject">
@@ -69,16 +70,16 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Ny"/>
+              <text resource-bundle="Jbundle" key="ny"/>
             </properties>
           </component>
-          <component id="5c039" class="javax.swing.JLabel">
+          <component id="5c039" class="javax.swing.JLabel" binding="lbPath">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <labelFor value="b7ca"/>
-              <text value="Sökväg"/>
+              <text resource-bundle="Jbundle" key="lbPath"/>
             </properties>
           </component>
           <component id="ee536" class="javax.swing.JButton" binding="bChangePath" custom-create="true">
@@ -86,12 +87,12 @@
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="..."/>
+              <text resource-bundle="Jbundle" key="dots"/>
             </properties>
           </component>
           <component id="b7ca" class="javax.swing.JTextField" binding="fexportPath" custom-create="true">
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="160" height="28"/>
               </grid>
             </constraints>
