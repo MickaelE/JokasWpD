@@ -1,8 +1,10 @@
 package com.mickenet.data;
 
 import org.parse4j.ParseException;
+import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 import org.parse4j.callback.FindCallback;
+import org.parse4j.callback.SaveCallback;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,29 +26,22 @@ class MainClass {
     private JLabel lbPath;
     private JButton ChangePathButton;
     private ArrayList<String> projects;
+    private Utils utils;
 
-    /*private MainClass() {
-
-       btnExport.addComponentListener(new ComponentAdapter() {
-
-            public void actionPerformed(ActionEvent e) {
-               //your actions
-                setProject(projectCombo.getSelectedItem().toString());
-            }
-
-        });
-    }*/
 
     public MainClass() {
         bProject.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,
-                        "Create Project",
+                String name = JOptionPane.showInputDialog(null,
+                        "Namnet på det nya projectet",
                         "Jokas WP Desktop",
-                        JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.QUESTION_MESSAGE);
+
+                setProject(name);
             }
         });
+        utils = new Utils();
         btnExport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,6 +49,7 @@ class MainClass {
                         "Start export",
                         "Jokas WP Desktop",
                         JOptionPane.PLAIN_MESSAGE);
+                createReport();
             }
         });
         bChangePath.addActionListener(new ActionListener() {
@@ -87,14 +83,14 @@ class MainClass {
      *
      */
     private void createUIComponents() {
-    mPanel = new JPanel();
-     btnExport = new JButton();
-     projectCombo = new JComboBox();
+        mPanel = new JPanel();
+        btnExport = new JButton();
+        projectCombo = new JComboBox();
         bChangePath = new JButton();
         lbPath = new JLabel();
-     fexportPath = new JTextField(Paths.get(".").toAbsolutePath().normalize().toString(),20);
+        fexportPath = new JTextField(Paths.get(".").toAbsolutePath().normalize().toString(), 20);
 
-    mPanel.setSize(200,200);
+        mPanel.setSize(200, 200);
         getProject();
 
         projectCombo.addActionListener(new ActionListener() {
@@ -110,14 +106,14 @@ class MainClass {
 
             }
         });
-       btnExport.setEnabled(false);
-}
+        btnExport.setEnabled(false);
+    }
 
     /***
      *
      * @return
      */
-    private ArrayList<String> getProject(){
+    private ArrayList<String> getProject() {
         projects = new ArrayList<>();
         ParseQuery<Project> query = ParseQuery.getQuery(Project.class);
         query.findInBackground(new FindCallback<Project>() {
@@ -132,8 +128,35 @@ class MainClass {
         return projects;
     }
 
+    private void createReport() {
+        final ArrayList<String> aReport = new ArrayList<>();
+        ParseQuery<Waypoints> query = ParseQuery.getQuery(Waypoints.class);
+       // query.whereLessThanOrEqualTo("rupees","");
+        query.findInBackground(new FindCallback<Waypoints>() {
+            @Override
+            public void done(List<Waypoints> results, ParseException e) {
+                for (Waypoints a : results) {
+                    aReport.add(a.getLatitud() + "," + a.getLongitud());
+                }
+                utils.printFile("Test", aReport);
+            }
+        });
+    }
+
     private void setProject(String s) {
-        //Hillolder
+        final ParseObject mProjekt = new ParseObject("project");
+        mProjekt.put("project_name", s);
+        mProjekt.put("enabled", true);
+        mProjekt.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException parseException) {
+                System.out.println("saveInBackground(): objectId: " + mProjekt.getObjectId());
+                //  System.out.println("saveInBackground(): objectId: " + mProjekt.get_name());
+                System.out.println("saveInBackground(): createdAt: " + mProjekt.getCreatedAt());
+                System.out.println("saveInBackground(): updatedAt: " + mProjekt.getUpdatedAt());
+            }
+        });
+
     }
 }
 
