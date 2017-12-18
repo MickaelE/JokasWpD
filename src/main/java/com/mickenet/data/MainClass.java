@@ -9,7 +9,6 @@ import org.parse4j.callback.SaveCallback;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,8 @@ class MainClass {
     private JButton ChangePathButton;
     private ArrayList<String> projects;
     private Utils utils;
-
+    JFileChooser chooser;
+    List<List<String>> listOfLists = new ArrayList<List<String>>();
 
     public MainClass() {
         bProject.addActionListener(new ActionListener() {
@@ -55,13 +55,34 @@ class MainClass {
         bChangePath.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,
-                        "Path",
-                        "Jokas WP Desktop",
-                        JOptionPane.PLAIN_MESSAGE);
+                chooser = new JFileChooser();
+                chooser.setCurrentDirectory(new java.io.File("."));
+                chooser.setDialogTitle("Jokas Desktop");
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                //
+                // disable the "All files" option.
+                //
+                chooser.setAcceptAllFileFilterUsed(false);
+                //
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    System.out.println("getCurrentDirectory(): "
+                            +  chooser.getCurrentDirectory());
+                    System.out.println("getSelectedFile() : "
+                            +  chooser.getSelectedFile());
+                    fexportPath.setText(chooser.getSelectedFile().toString());
+                }
+                else {
+                    System.out.println("No Selection ");
+                }
+            }
+        });
+        bChangePath.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         });
+
     }
 
     /***
@@ -71,7 +92,7 @@ class MainClass {
     public static void main(String[] args) {
         Defaults def = new Defaults();
         def.initializeParse();
-        JFrame frame = new JFrame("MainClass");
+        JFrame frame = new JFrame("Jokas Desktop");
         frame.setContentPane(new MainClass().mPanel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
@@ -83,12 +104,13 @@ class MainClass {
      *
      */
     private void createUIComponents() {
+        String myDocumentPath = System.getProperty("user.home") + "/Documents";
         mPanel = new JPanel();
         btnExport = new JButton();
         projectCombo = new JComboBox();
         bChangePath = new JButton();
         lbPath = new JLabel();
-        fexportPath = new JTextField(Paths.get(".").toAbsolutePath().normalize().toString(), 20);
+        fexportPath = new JTextField(myDocumentPath, 20);
 
         mPanel.setSize(200, 200);
         getProject();
@@ -121,6 +143,7 @@ class MainClass {
             public void done(List<Project> results, ParseException e) {
                 for (Project a : results) {
                     projects.add(a.getName());
+                    listOfLists.add(new ArrayList<String>());
                 }
                 projectCombo.setModel(new DefaultComboBoxModel(projects.toArray()));
             }
@@ -129,16 +152,18 @@ class MainClass {
     }
 
     private void createReport() {
+       final String fileName = fexportPath.getText() +"/" + projectCombo.getSelectedItem().toString() + ".dxf";
         final ArrayList<String> aReport = new ArrayList<>();
         ParseQuery<Waypoints> query = ParseQuery.getQuery(Waypoints.class);
-       // query.whereLessThanOrEqualTo("rupees","");
+        query.whereLessThanOrEqualTo("projid","");
         query.findInBackground(new FindCallback<Waypoints>() {
             @Override
             public void done(List<Waypoints> results, ParseException e) {
                 for (Waypoints a : results) {
-                    aReport.add(a.getLatitud() + "," + a.getLongitud());
+                    aReport.add(a.getLatitude() + "," + a.getLongitude());
+                    System.out.println("Latitude "+ a.getLatitude());
                 }
-                utils.printFile("Test", aReport);
+                utils.printFile(fileName, aReport);
             }
         });
     }
